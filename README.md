@@ -4,7 +4,11 @@ Análise dos preços máximos de medicamentos regulados pela CMED/ANVISA:
 quanto genéricos e similares custam em relação aos medicamentos novos
 equivalentes, e o que explica as diferenças de preço.
 
-> 🚧 Em andamento: clustering e detecção de preços atípicos
+**Quatro perfis de mercado:** o clustering (K-Means) separou as substâncias em
+mercado competitivo, similares e marcas populares, novos sem genérico e
+alto custo/especialidade, este com PMC mediano de R$ 9.282.
+
+![Segmentos](reports/figures/08_segmentos_pca.png)
 
 ## Principais resultados
 
@@ -44,7 +48,7 @@ aproximação; o agrupamento por texto pode juntar itens não equivalentes.
 |---|---|
 | `01_limpeza.ipynb` | Leitura do arquivo bruto, padronização e conversão dos preços |
 | `02_eda.ipynb` | Comparação entre tipos de produto, concorrência e áreas terapêuticas |
-| `03_clustering.ipynb` | *em breve* |
+| `03_clustering.ipynb` | Segmentação de substâncias por perfil de mercado (K-Means) |
 
 ## Como reproduzir
 
