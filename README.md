@@ -4,7 +4,32 @@ Análise dos preços máximos de medicamentos regulados pela CMED/ANVISA:
 quanto genéricos e similares custam em relação aos medicamentos novos
 equivalentes, e o que explica as diferenças de preço.
 
-## Principais resultados
+## 📊 Dashboard Power BI
+
+Dashboard interativo de 3 páginas (em inglês) construído sobre a lista CMED de 09/11/2026
+(26.694 apresentações, 263 laboratórios):
+
+- **Market Overview:** tipos de produto, maiores laboratórios, tarjas e áreas terapêuticas
+- **Price Analysis:** genérico vs. medicamento novo na mesma apresentação (701 pares comparáveis,
+  economia mediana de 35%), dispersão de preços e maiores economias por embalagem
+- **Tax & Regulation:** preço fábrica (PF) vs. preço máximo ao consumidor (PMC) por alíquota de ICMS,
+  restrição hospitalar, CAP e lista de PIS/COFINS
+
+![Market Overview](reports/figures/powerbi/01_market_overview.png)
+![Price Analysis](reports/figures/powerbi/02_price_analysis.png)
+![Tax & Regulation](reports/figures/powerbi/03_tax_regulation.png)
+
+**Como foi feito:** `src/prepare_powerbi.py` (pandas) lê a planilha bruta da CMED, converte os preços,
+traduz as categorias, agrupa as classes terapêuticas por grupo anatômico (EphMRA), reorganiza os preços
+por alíquota de ICMS e cruza genéricos com medicamentos novos equivalentes. O Power BI usa um modelo
+com tabela de apresentações (1) → preços por ICMS (*), medidas DAX (economia mediana, spread P90/P10,
+margem PMC vs PF, carga tributária) e tema próprio (`powerbi/pharma_theme.json`).
+
+**Para abrir:** baixe a lista da CMED em `data/raw/`, rode `python src/prepare_powerbi.py`, abra
+`powerbi/Pharma_Market_Price_Dashboard.pbix` e clique em **Atualizar**. O PMC do dashboard considera
+ICMS de 18% (São Paulo); as análises dos notebooks usam o PMC sem impostos.
+
+## Principais resultados (notebooks)
 
 **Genéricos custam, em mediana, 35% menos que o medicamento novo equivalente**,
 e são mais baratos em 97% dos 411 grupos comparados. A maioria fica
@@ -75,7 +100,7 @@ aproximação; o agrupamento por texto pode juntar itens não equivalentes.
 
 ## Stack
 
-Python · pandas · matplotlib · seaborn · scikit-learn
+Python · pandas · matplotlib · seaborn · scikit-learn · Power BI · DAX
 
 ---
 **Cristian Guedes** · [LinkedIn](https://www.linkedin.com/in/cristiangds/)
